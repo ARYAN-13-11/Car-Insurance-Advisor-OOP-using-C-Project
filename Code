@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+class CarInsurance {
+private:
+ int age;
+ int carValue;
+ int numAccidents;
+ int numTickets;
+ string gender;
+ float insuranceCost;
+public:
+// Constructor
+ CarInsurance(int age, int carValue, int numAccidents, int numTickets, string gender) {
+ this->age = age;
+ this->carValue = carValue;
+ this->numAccidents = numAccidents;
+ this->numTickets = numTickets;
+ this->gender = gender;
+ }
+ // Calculate insurance cost
+ float calculateInsuranceCost() {
+if (age < 25) {
+ insuranceCost = carValue * 0.10;
+ } else {
+ insuranceCost = carValue * 0.07;
+ }
+ if (numAccidents > 0) {
+ insuranceCost += (numAccidents * 0.05) * insuranceCost;
+ }
+ if (numTickets > 0) {
+ insuranceCost += (numTickets * 0.02) * insuranceCost;
+ }
+ if (gender == "male") {
+ insuranceCost += 0.05 * insuranceCost;
+ }
+ return insuranceCost;
+ }
+};
+int main() {
+ int numUsers;
+ int age;
+ int carValue;
+ int numAccidents;
+ int numTickets;
+ string gender;
+vector<CarInsurance> users;
+ // Get number of users
+ cout << "Enter the number of users: ";
+ cin >> numUsers;
+ // Get user input for each user
+ for (int i = 0; i < numUsers; i++) {
+ cout << "User #" << i+1 << endl;
+ cout << "Enter your age: ";
+ cin >> age;
+ cout << "Enter your car's value: ";
+ cin >> carValue;
+ cout << "Enter the number of accidents you've had: ";
+ cin >> numAccidents;
+ cout << "Enter the number of tickets you've had: ";
+ cin >> numTickets;
+ cout << "Enter your gender (male/female): ";
+ cin >> gender;
+// Create a CarInsurance object and add it to the vector
+ CarInsurance insurance(age, carValue, numAccidents, numTickets, gender);
+ users.push_back(insurance);
+ }
+ // Calculate insurance cost for each user and output it to the user
+ for (int i = 0; i < numUsers; i++) {
+ cout << "User #" << i+1 << " insurance cost is: " << users[i].calculateInsuranceCost()
+<< endl; } return 0; } 
